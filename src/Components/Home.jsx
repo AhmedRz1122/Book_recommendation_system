@@ -29,7 +29,7 @@ const Home = () => {
             placeholder='Book Description'
             className='p-2 rounded text-black'
           />
-          <button className='ml-2 bg-amber-200 text-black p-2 rounded hover:bg-amber-300'>
+          <button className='ml-3 bg-amber-200 text-black p-2 rounded hover:bg-amber-300'>
             Get Recommendation
           </button>
         </div>
