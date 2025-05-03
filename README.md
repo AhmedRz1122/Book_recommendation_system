@@ -1,12 +1,15 @@
-# React + Vite
+# Book Recommendation System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A complete book recommendation system project using frameworks like React.js, Flask, Tailwind.css, and Shadcn_ui.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Frameworks and technologies:
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" width="100" height="100">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg" alt="Tailwind CSS" width="100" height="100">
+ <img src="https://github.com/user-attachments/assets/b1d0ffdf-3474-418c-965f-9b9ec88ed882" 
+       alt="Flask" 
+       width="100" 
+       height="100">
+  <img src="https://github.com/user-attachments/assets/236b2496-18c9-466c-8765-2f5cdaee3634" alt="Shadcn/ui" width="100" height="100">
+  <img src="https://avatars.githubusercontent.com/u/108348105?s=400&v=4" alt="Chroma DB" width="100" height="100">
+</div>
