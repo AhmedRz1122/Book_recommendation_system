@@ -24,14 +24,16 @@ const Home = () => {
         <div className="p-6 text-white">
           <h1 className='text-2xl font-bold mb-4'>Discover Your Next Favourite Book</h1>
           <p className='mb-4'>Tell us about the type of book you're looking for and the emotions you want to feel</p>
+          <div className="description flex">
           <input
             type="text"
             placeholder='Book Description'
-            className='p-2 rounded text-black'
+           className="p-2 rounded text-black border-2 border-solid border-amber-50 w-100"
           />
           <button className='ml-3 bg-amber-200 text-black p-2 rounded hover:bg-amber-300'>
             Get Recommendation
           </button>
+          </div>
         </div>
       </div>
     </div>
