@@ -3,6 +3,11 @@ import booklogo from '../assets/Booklogo.jpg';
 import './Home.css';
 import Carousel from './Carousel';
 import { About } from './About';
+import BookRecommender from './BookRecomender';
+import BookDetail from './BookDetail';
+import Footer from './Footer';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -57,6 +62,8 @@ const Home = () => {
       </div>
     
 <About/>
+<BookRecommender/>
+<Footer/>
     </div>
   );
 };

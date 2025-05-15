@@ -1,2 +1,10 @@
 @import "tailwindcss";
 @import 'flowbite';
+
+.custom-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE */
+}
+.custom-scroll::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
