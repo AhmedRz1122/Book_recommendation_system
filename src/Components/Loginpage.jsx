@@ -1,4 +1,5 @@
 import React from "react";
+import "./Loginpage.css";
 
 const Loginpage = () => {
   const [email, setEmail] = React.useState("");
@@ -13,7 +14,7 @@ const Loginpage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+        <div className="header_gradient bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
           <h1 className="text-2xl font-bold">Welcome Back</h1>
           <p className="text-blue-100">Sign in to your account</p>
         </div>
@@ -51,7 +52,7 @@ const Loginpage = () => {
 
           <button
             type="submit"
-            className="w-full h-10 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+            className="button_gradient w-full h-10 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
           >
             Sign In
           </button>

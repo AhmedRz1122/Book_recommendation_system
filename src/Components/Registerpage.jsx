@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import "./Registerpage.css"
 
 const Registerpage = () => {
 const [email, setEmail] = React.useState("");
@@ -15,7 +16,7 @@ const [email, setEmail] = React.useState("");
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
+        <div className="header_register bg-gradient-to-r from-blue-600 to-purple-600 p-6 text-white">
           <h1 className="text-2xl font-bold">Register User</h1>
           <p className="text-blue-100">Sign up to your account</p>
         </div>
@@ -68,7 +69,7 @@ const [email, setEmail] = React.useState("");
 
           <button
             type="submit"
-            className="w-full h-10 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+            className="button_register w-full h-10 px-4 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-medium shadow-md hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
           >
             Sign Up
           </button>
