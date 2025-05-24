@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Components/Home';
+import Home from './page/Home';
 import BookDetail from './Components/BookDetail';
-import Loginpage from './Components/Loginpage'
-import Registerpage from './Components/Registerpage';
-import BookRecommender from './Components/BookRecomender';
+import Loginpage from './page/Loginpage'
+import Registerpage from './page/Registerpage';
+import BookRecommender from './page/BookRecomender';
+import { About } from './Components/About';
 
 
 function App() {

@@ -1,14 +1,16 @@
 import React from "react";
+import { Link ,useNavigate } from "react-router-dom";
 import "./Loginpage.css";
 
 const Loginpage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-
+ const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Login attempt:", { email, password });
     // Add your login logic here
+    navigate('/', { replace: true });
   };
 
   return (
@@ -21,7 +23,7 @@ const Loginpage = () => {
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left ">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left">
               Email
             </label>
             <input
@@ -36,7 +38,7 @@ const Loginpage = () => {
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 text-left   ">
+            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 text-left">
               Password
             </label>
             <input
@@ -61,9 +63,9 @@ const Loginpage = () => {
         <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-center">
           <p className="text-sm text-gray-600">
             Don't have an account?{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            <Link to="/Register" className="text-blue-600 hover:underline font-medium">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </div>

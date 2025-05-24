@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import Footer from './Footer';
+import Footer from '../Components/Footer';
 
 const BookRecommender = () => {
   // State management

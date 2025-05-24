@@ -1,17 +1,19 @@
 import React from 'react';
-import "./Registerpage.css"
+import "./Registerpage.css";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Registerpage = () => {
-const [email, setEmail] = React.useState("");
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [Username, setUsername] = React.useState("");
+  const [username, setUsername] = React.useState("");
+ const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Login attempt:", { Username,email, password });
+    console.log("Registration attempt:", { username, email, password });
     // Add your Register logic here
+     navigate('/', { replace: true });
   };
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center p-4">
@@ -22,14 +24,14 @@ const [email, setEmail] = React.useState("");
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
-        <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left ">
+          <div className="space-y-2">
+            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 text-left">
               Username
             </label>
             <input
               id="username"
-              type="username"
-              value={Username}
+              type="text"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm"
               placeholder="Name"
@@ -38,7 +40,7 @@ const [email, setEmail] = React.useState("");
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left ">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left">
               Email
             </label>
             <input
@@ -53,7 +55,7 @@ const [email, setEmail] = React.useState("");
           </div>
 
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 text-left   ">
+            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 text-left">
               Password
             </label>
             <input
@@ -77,15 +79,15 @@ const [email, setEmail] = React.useState("");
 
         <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-center">
           <p className="text-sm text-gray-600">
-            Already register?{" "}
-            <a href="#" className="text-blue-600 hover:underline">
+            Already registered?{" "}
+            <Link to="/Login" className="text-blue-600 hover:underline font-medium">
               Sign in
-            </a>
+            </Link>
           </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Registerpage
+export default Registerpage;

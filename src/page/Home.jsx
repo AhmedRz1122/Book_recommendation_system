@@ -1,14 +1,16 @@
 import React from 'react';
 import booklogo from '../assets/Booklogo.jpg';
 import './Home.css';
-import Carousel from './Carousel';
-import { About } from './About';
-import BookRecommender from './BookRecomender';
-import BookDetail from './BookDetail';
-import { motion } from 'framer-motion';
+import Carousel from '../Components/Carousel';
+import { About } from '../Components/About';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const scrollToAbout = () => {
+    const aboutSection = document.getElementById('about');
+    aboutSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className='w-full text-gray-900 overflow-x-hidden'>
       {/* Carousel background section */}
@@ -23,19 +25,29 @@ const Home = () => {
           {/* Navigation */}
           <nav className='flex w-full h-16 bg-black/90 text-white items-center px-6 md:px-10 justify-between'>
             <div className='flex gap-x-3 md:gap-x-4 items-center'>
-              <img 
-                src={booklogo} 
-                alt="Main logo of Book Recommender" 
-                className='h-9 w-9 md:h-10 md:w-10 rounded-full border border-amber-300'
-              />
-              <h1 className='text-sm md:text-base lg:text-lg font-medium'>Intelligent Book Recommendation System</h1>
+              <Link to="/" className='flex gap-x-3 md:gap-x-4 items-center'>
+                <img 
+                  src={booklogo} 
+                  alt="Main logo of Book Recommender" 
+                  className='h-9 w-9 md:h-10 md:w-10 rounded-full border border-amber-300'
+                />
+                <h1 className='text-sm md:text-base lg:text-lg font-medium'>Intelligent Book Recommendation System</h1>
+              </Link>
             </div>
             <div className='flex items-center'>
               <ul className='flex gap-x-4 md:gap-x-6 lg:gap-x-8 text-sm md:text-base'>
-                <li className='hover:text-amber-300 cursor-pointer transition-colors duration-200'>Home</li>
-                <li className='hover:text-amber-300 cursor-pointer transition-colors duration-200'>About</li>
-                <li className='hover:text-amber-300 cursor-pointer transition-colors duration-200'>Login</li>
-                <li className='hover:text-amber-300 cursor-pointer transition-colors duration-200'>Sign Up</li>
+                <li className='hover:text-amber-300 transition-colors duration-200'>
+                  <Link to="/">Home</Link>
+                </li>
+                <li className='hover:text-amber-300 transition-colors duration-200'>
+                  <button onClick={scrollToAbout}>About</button>
+                </li>
+                <li className='hover:text-amber-300 transition-colors duration-200'>
+                  <Link to="/Login">Login</Link>
+                </li>
+                <li className='hover:text-amber-300 transition-colors duration-200'>
+                  <Link to="/Register">Sign Up</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -51,17 +63,21 @@ const Home = () => {
                   placeholder='Book description'
                   className="p-3 rounded h-auto text-gray-800 w-full mb-4 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
-                <button className='bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-8 rounded transition-all duration-300 shadow-md hover:shadow-amber-500/30'>
+                <Link 
+                  to="/BookRecommender" 
+                  className='bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-8 rounded transition-all duration-300 shadow-md hover:shadow-amber-500/30'
+                >
                   Get Recommendations
-                </button>
+                </Link>
               </div>
             </div>
           </section>
         </div>
       </div>
     
-<About/>
-
+      <div id="about">
+        <About />
+      </div>
     </div>
   );
 };
