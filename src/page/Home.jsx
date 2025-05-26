@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import booklogo from '../assets/Booklogo.jpg';
 import './Home.css';
 import Carousel from '../Components/Carousel';
 import { About } from '../Components/About';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import {bookQuery} from './bookQuery.js';
 
 const Home = () => {
+  const [inputQuery, setInputQuery] = useState(''); // Local state for input
+  const { setQuery } = useContext(bookQuery); // Access setQuery from context
+  const navigate = useNavigate();
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById('about');
     aboutSection?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setQuery(inputQuery); // Update context query
+    navigate('/BookRecommender'); // Navigate to BookRecommender
   };
 
   return (
@@ -57,19 +68,21 @@ const Home = () => {
             <div className="p-6 md:p-8 text-white bg-black/60 rounded-lg max-w-xl mx-4 backdrop-blur-[0px] border border-white/10">
               <h1 className='text-3xl md:text-3xl font-bold mb-4 md:mb-6'>Discover Your Next Favorite Book</h1>
               <p className='mb-6 text-lg md:text-lg'>Tell us about the type of book you're looking for and the emotions you want to feel.</p>
-              <div className="flex flex-col items-center">
+              <form onSubmit={handleSubmit} className="flex flex-col items-center">
                 <input
                   type="text"
                   placeholder='Book description'
+                  value={inputQuery}
+                  onChange={(e) => setInputQuery(e.target.value)}
                   className="p-3 rounded h-auto text-gray-800 w-full mb-4 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-400"
                 />
-                <Link 
+                <button
                   to="/BookRecommender" 
                   className='bg-amber-500 hover:bg-amber-600 text-white font-semibold py-2 px-8 rounded transition-all duration-300 shadow-md hover:shadow-amber-500/30'
                 >
                   Get Recommendations
-                </Link>
-              </div>
+                </button>
+              </form>
             </div>
           </section>
         </div>

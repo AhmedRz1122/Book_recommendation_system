@@ -1,18 +1,36 @@
-import React from 'react';
-import "./Registerpage.css";
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import "./Registerpage.css";
 
 const Registerpage = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [username, setUsername] = React.useState("");
- const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Registration attempt:", { username, email, password });
-    // Add your Register logic here
-     navigate('/', { replace: true });
+    setError("");
+
+    try {
+      const response = await axios.post(
+        "/api/signup",
+        { username, email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      if (response.status===201) {
+        console.log("Registration successful:", response.data);
+        navigate('/Login', { replace: true });  // Redirect to login
+      } else {
+        setError(response.data.message || "Registration failed");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Server error. Try again later.");
+      console.error("Registration error:", err);
+    }
   };
 
   return (
@@ -24,6 +42,12 @@ const Registerpage = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          {error && (
+            <div className="text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-2">
             <label htmlFor="username" className="block text-sm font-semibold text-gray-700 text-left">
               Username
@@ -31,6 +55,7 @@ const Registerpage = () => {
             <input
               id="username"
               type="text"
+              name='username'
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm"
@@ -46,6 +71,7 @@ const Registerpage = () => {
             <input
               id="email"
               type="email"
+              name='email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm"
@@ -61,6 +87,7 @@ const Registerpage = () => {
             <input
               id="password"
               type="password"
+              name='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-shadow shadow-sm"

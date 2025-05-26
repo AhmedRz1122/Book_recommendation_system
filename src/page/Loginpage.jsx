@@ -1,16 +1,45 @@
-import React from "react";
-import { Link ,useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./Loginpage.css";
 
 const Loginpage = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
- const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [token, setToken] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", { email, password });
-    // Add your login logic here
-    navigate('/', { replace: true });
+    setError("");
+
+    try {
+      const response = await axios.post(
+        "/api/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      if (response.status===200) {
+        
+        const { access_token } = response.data;
+        
+        // Store token in localStorage
+        localStorage.setItem("token", access_token);
+        
+        // Set default Authorization header for future requests
+        axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+        
+        // console.log("Login successful. Token:", access_token);
+        navigate("/Home", { replace: true });  // Redirect to home on success
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (err) {
+      setError("Login failed. Please try again.");
+      console.error("Login error:", err);
+    }
   };
 
   return (
@@ -22,6 +51,12 @@ const Loginpage = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
+          {error && (
+            <div className="text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+
           <div className="space-y-2">
             <label htmlFor="email" className="block text-sm font-semibold text-gray-700 text-left">
               Email
@@ -29,6 +64,7 @@ const Loginpage = () => {
             <input
               id="email"
               type="email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-shadow shadow-sm"
@@ -44,6 +80,7 @@ const Loginpage = () => {
             <input
               id="password"
               type="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full h-10 px-3 rounded-lg border border-gray-300 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-shadow shadow-sm"

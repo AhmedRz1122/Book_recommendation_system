@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BookContext } from '../page/bookQuery.js';
 
 const BookDetail = () => {
   const { bookId } = useParams();
@@ -8,102 +9,105 @@ const BookDetail = () => {
   const navigate = useNavigate();
   const bookRef = useRef(null);
 
- const sampleBooks = [
-  {
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    genre: "Fantasy",
-    mood: "Adventurous",
-    rating: 4.28,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
-    description: "Bilbo Baggins, a quiet and unassuming hobbit, is swept into an epic quest to help a group of dwarves reclaim their homeland from the fearsome dragon Smaug. Along the way, he faces trolls, goblins, and a mysterious creature called Gollum. With courage he never knew he had, Bilbo transforms from a reluctant traveler to a true hero."
-  },
-  {
-    title: "To Kill a Mockingbird",
-    author: "Harper Lee",
-    genre: "Classic",
-    mood: "Thought-provoking",
-    rating: 4.27,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
-    description: "Set in the racially segregated American South, this novel follows young Scout Finch as her father, Atticus, defends a black man falsely accused of rape. Through Scout’s eyes, readers experience the harsh realities of prejudice and moral courage. The story is both a coming-of-age tale and a poignant critique of injustice."
-  },
-  {
-    title: "1984",
-    author: "George Orwell",
-    genre: "Dystopian",
-    mood: "Bleak",
-    rating: 4.17,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
-    description: "In a grim future where the government controls every aspect of life, Winston Smith dares to question authority and seek truth. Under the watchful eye of Big Brother, he begins a dangerous rebellion. Orwell’s haunting vision of a surveillance state warns of the dangers of unchecked power and lost freedoms."
-  },
-  {
-    title: "Pride and Prejudice",
-    author: "Jane Austen",
-    genre: "Romance",
-    mood: "Witty",
-    rating: 4.25,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg",
-    description: "Elizabeth Bennet navigates the complexities of social class, family expectations, and love in 19th-century England. Her evolving relationship with the proud Mr. Darcy leads to sharp wit and emotional growth. Austen crafts a timeless story of misunderstandings, personal pride, and the transformative power of love."
-  },
-  {
-    title: "The Great Gatsby",
-    author: "F. Scott Fitzgerald",
-    genre: "Classic",
-    mood: "Melancholic",
-    rating: 3.91,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
-    description: "Jay Gatsby, a mysterious millionaire, throws lavish parties in hopes of winning back his lost love, Daisy Buchanan. Narrated by Nick Carraway, the novel explores the illusion of the American Dream and the emptiness beneath glittering wealth. Set in the Roaring Twenties, it's a tale of love, longing, and despair."
-  },
-  {
-    title: "Moby-Dick",
-    author: "Herman Melville",
-    genre: "Adventure",
-    mood: "Epic",
-    rating: 3.49,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780142437247-L.jpg",
-    description: "Ishmael joins the whaling ship Pequod, led by the obsessed Captain Ahab, who seeks revenge on the great white whale, Moby Dick. The voyage becomes a symbolic exploration of fate, madness, and man’s struggle against nature. Melville’s masterpiece delves deep into the human psyche and existential questions."
-  },
-  {
-    title: "Brave New World",
-    author: "Aldous Huxley",
-    genre: "Science Fiction",
-    mood: "Satirical",
-    rating: 3.99,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg",
-    description: "In a world engineered for conformity and pleasure, individuality is suppressed by conditioning and drugs. Bernard Marx begins to question this artificial harmony when he meets John, a 'savage' raised outside the system. Huxley’s dystopia critiques consumerism, loss of identity, and the cost of societal stability."
-  },
-  {
-    title: "The Catcher in the Rye",
-    author: "J.D. Salinger",
-    genre: "Fiction",
-    mood: "Reflective",
-    rating: 3.80,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780316769488-L.jpg",
-    description: "Holden Caulfield recounts his days in New York after being expelled from prep school. Disillusioned with the 'phoniness' of the adult world, he wanders the city in search of meaning and authenticity. Salinger captures teenage angst and the struggle to find one’s place in a confusing world."
-  },
-  {
-    title: "The Alchemist",
-    author: "Paulo Coelho",
-    genre: "Adventure",
-    mood: "Inspirational",
-    rating: 3.86,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg",
-    description: "Santiago, a young shepherd, dreams of a treasure in the Egyptian pyramids and sets off on a journey of self-discovery. Along the way, he meets mentors and faces trials that reveal deeper truths. Coelho’s novel is a philosophical tale about destiny, following one’s heart, and the pursuit of purpose."
-  },
-  {
-    title: "Jane Eyre",
-    author: "Charlotte Brontë",
-    genre: "Gothic",
-    mood: "Empowering",
-    rating: 4.12,
-    coverImage: "https://covers.openlibrary.org/b/isbn/9780142437209-L.jpg",
-    description: "Orphaned and mistreated, Jane Eyre grows into a strong and principled woman. As a governess at Thornfield Hall, she falls in love with the mysterious Mr. Rochester. Brontë weaves themes of morality, independence, and resilience into this gothic romance, making it a powerful story of personal triumph."
-  }
-];
+  const {books} = useContext(BookContext);
+  // console.log(books);
+
+//  const sampleBooks = [
+//   {
+//     title: "The Hobbit",
+//     author: "J.R.R. Tolkien",
+//     genre: "Fantasy",
+//     mood: "Adventurous",
+//     rating: 4.28,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780547928227-L.jpg",
+//     description: "Bilbo Baggins, a quiet and unassuming hobbit, is swept into an epic quest to help a group of dwarves reclaim their homeland from the fearsome dragon Smaug. Along the way, he faces trolls, goblins, and a mysterious creature called Gollum. With courage he never knew he had, Bilbo transforms from a reluctant traveler to a true hero."
+//   },
+//   {
+//     title: "To Kill a Mockingbird",
+//     author: "Harper Lee",
+//     genre: "Classic",
+//     mood: "Thought-provoking",
+//     rating: 4.27,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780061120084-L.jpg",
+//     description: "Set in the racially segregated American South, this novel follows young Scout Finch as her father, Atticus, defends a black man falsely accused of rape. Through Scout’s eyes, readers experience the harsh realities of prejudice and moral courage. The story is both a coming-of-age tale and a poignant critique of injustice."
+//   },
+//   {
+//     title: "1984",
+//     author: "George Orwell",
+//     genre: "Dystopian",
+//     mood: "Bleak",
+//     rating: 4.17,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg",
+//     description: "In a grim future where the government controls every aspect of life, Winston Smith dares to question authority and seek truth. Under the watchful eye of Big Brother, he begins a dangerous rebellion. Orwell’s haunting vision of a surveillance state warns of the dangers of unchecked power and lost freedoms."
+//   },
+//   {
+//     title: "Pride and Prejudice",
+//     author: "Jane Austen",
+//     genre: "Romance",
+//     mood: "Witty",
+//     rating: 4.25,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg",
+//     description: "Elizabeth Bennet navigates the complexities of social class, family expectations, and love in 19th-century England. Her evolving relationship with the proud Mr. Darcy leads to sharp wit and emotional growth. Austen crafts a timeless story of misunderstandings, personal pride, and the transformative power of love."
+//   },
+//   {
+//     title: "The Great Gatsby",
+//     author: "F. Scott Fitzgerald",
+//     genre: "Classic",
+//     mood: "Melancholic",
+//     rating: 3.91,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg",
+//     description: "Jay Gatsby, a mysterious millionaire, throws lavish parties in hopes of winning back his lost love, Daisy Buchanan. Narrated by Nick Carraway, the novel explores the illusion of the American Dream and the emptiness beneath glittering wealth. Set in the Roaring Twenties, it's a tale of love, longing, and despair."
+//   },
+//   {
+//     title: "Moby-Dick",
+//     author: "Herman Melville",
+//     genre: "Adventure",
+//     mood: "Epic",
+//     rating: 3.49,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780142437247-L.jpg",
+//     description: "Ishmael joins the whaling ship Pequod, led by the obsessed Captain Ahab, who seeks revenge on the great white whale, Moby Dick. The voyage becomes a symbolic exploration of fate, madness, and man’s struggle against nature. Melville’s masterpiece delves deep into the human psyche and existential questions."
+//   },
+//   {
+//     title: "Brave New World",
+//     author: "Aldous Huxley",
+//     genre: "Science Fiction",
+//     mood: "Satirical",
+//     rating: 3.99,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg",
+//     description: "In a world engineered for conformity and pleasure, individuality is suppressed by conditioning and drugs. Bernard Marx begins to question this artificial harmony when he meets John, a 'savage' raised outside the system. Huxley’s dystopia critiques consumerism, loss of identity, and the cost of societal stability."
+//   },
+//   {
+//     title: "The Catcher in the Rye",
+//     author: "J.D. Salinger",
+//     genre: "Fiction",
+//     mood: "Reflective",
+//     rating: 3.80,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780316769488-L.jpg",
+//     description: "Holden Caulfield recounts his days in New York after being expelled from prep school. Disillusioned with the 'phoniness' of the adult world, he wanders the city in search of meaning and authenticity. Salinger captures teenage angst and the struggle to find one’s place in a confusing world."
+//   },
+//   {
+//     title: "The Alchemist",
+//     author: "Paulo Coelho",
+//     genre: "Adventure",
+//     mood: "Inspirational",
+//     rating: 3.86,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg",
+//     description: "Santiago, a young shepherd, dreams of a treasure in the Egyptian pyramids and sets off on a journey of self-discovery. Along the way, he meets mentors and faces trials that reveal deeper truths. Coelho’s novel is a philosophical tale about destiny, following one’s heart, and the pursuit of purpose."
+//   },
+//   {
+//     title: "Jane Eyre",
+//     author: "Charlotte Brontë",
+//     genre: "Gothic",
+//     mood: "Empowering",
+//     rating: 4.12,
+//     coverImage: "https://covers.openlibrary.org/b/isbn/9780142437209-L.jpg",
+//     description: "Orphaned and mistreated, Jane Eyre grows into a strong and principled woman. As a governess at Thornfield Hall, she falls in love with the mysterious Mr. Rochester. Brontë weaves themes of morality, independence, and resilience into this gothic romance, making it a powerful story of personal triumph."
+//   }
+// ];
 
   // Find book by ID
-  const book = sampleBooks.find(b => 
-    `${b.title}-${b.author}`.toLowerCase() === decodeURIComponent(bookId).toLowerCase()
+  const book = books.find(b => 
+    `${b.title}-${b.authors}`.toLowerCase() === decodeURIComponent(bookId).toLowerCase()
   );
 
   // Get click position for morph animation
@@ -225,7 +229,7 @@ const BookDetail = () => {
               className="relative w-full h-full max-h-[500px] flex items-center justify-center"
             >
               <img
-                src={book.coverImage}
+                src={book.image}
                 alt={book.title}
                 className="h-full max-h-[400px] w-auto object-contain shadow-xl rounded-sm"
                 onError={(e) => {
@@ -233,9 +237,9 @@ const BookDetail = () => {
                   e.target.className = "h-full max-h-[400px] w-auto object-contain bg-gray-200 p-4";
                 }}
               />
-              <div className="absolute -bottom-4 -right-4 bg-amber-500 text-white font-bold px-3 py-1 rounded-lg shadow-md">
+              {/* <div className="absolute -bottom-4 -right-4 bg-amber-500 text-white font-bold px-3 py-1 rounded-lg shadow-md">
                 {book.rating.toFixed(1)} ★
-              </div>
+              </div> */}
             </motion.div>
           </div>
 
@@ -249,7 +253,7 @@ const BookDetail = () => {
                 transition={{ delay: 0.1 }}
               >
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{book.title}</h1>
-                <h2 className="text-xl md:text-2xl text-gray-600 mt-2">by {book.author}</h2>
+                <h2 className="text-xl md:text-2xl text-gray-600 mt-2">by {book.authors}</h2>
               </motion.div>
 
               {/* Metadata Chips */}
@@ -275,7 +279,7 @@ const BookDetail = () => {
                 className="prose max-w-none"
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-3">About This Book</h3>
-                <p className="text-gray-700 leading-relaxed">{book.description}</p>
+                <p className="text-gray-700 leading-relaxed">{book.caption}</p>
               </motion.div>
 
               {/* Similar Books */}
@@ -287,7 +291,7 @@ const BookDetail = () => {
               >
                 <h3 className="text-xl font-semibold text-gray-800 mb-4">Readers Also Enjoyed</h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {sampleBooks
+                  {books
                     .filter(b => b.title !== book.title)
                     .slice(0, 3)
                     .map(book => (
@@ -295,11 +299,11 @@ const BookDetail = () => {
                         key={book.title}
                         whileHover={{ y: -5 }}
                         className="cursor-pointer group"
-                        onClick={() => navigate(`/book/${encodeURIComponent(`${book.title}-${book.author}`)}`)}
+                        onClick={() => navigate(`/book/${encodeURIComponent(`${book.title}-${book.authors}`)}`)}
                       >
                         <div className="aspect-[2/3] bg-gray-100 rounded-lg overflow-hidden shadow-sm group-hover:shadow-md transition-all">
                           <img 
-                            src={book.coverImage} 
+                            src={book.image} 
                             alt={book.title}
                             className="w-full h-full object-cover"
                           />
