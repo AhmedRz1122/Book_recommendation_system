@@ -46,7 +46,13 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 5. Run Backend
+### 5. Generate Embeddings
+
+```bash
+python test.py
+```
+
+### 6. Run Backend
 
 ```bash
 python app.py
