@@ -16,8 +16,8 @@ This guide will help you set up a virtual environment, install dependencies, and
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
-cd <your-repo-folder>
+git clone <git-repo-url>
+cd <repo-folder>
 ```
 
 ### 2. Create Virtual Environment
