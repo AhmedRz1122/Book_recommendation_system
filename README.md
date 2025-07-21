@@ -14,8 +14,7 @@ A complete book recommendation system project using frameworks like React.js, Fl
   <img src="https://avatars.githubusercontent.com/u/108348105?s=400&v=4" alt="Chroma DB" width="100" height="100">
 </div>
 
-# Demonstration:
-https://youtu.be/UW32w64Jhnk
+
 
 
 
